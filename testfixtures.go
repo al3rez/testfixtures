@@ -340,12 +340,6 @@ func (l *Loader) EnsureTestDatabase() error {
 //             ...
 //     }
 func (l *Loader) Load() error {
-	if !l.skipTestDatabaseCheck {
-		if err := l.EnsureTestDatabase(); err != nil {
-			return err
-		}
-	}
-
 	err := l.helper.disableReferentialIntegrity(l.db, func(tx *sql.Tx) error {
 		modifiedTables := make(map[string]bool, len(l.fixturesFiles))
 		for _, file := range l.fixturesFiles {
